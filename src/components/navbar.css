@@ -1,0 +1,96 @@
+/* Navbar container styles */
+.navbar {
+    background-color: #333; /* Background color for the Navbar */
+    width: 200px; /* Width of the Navbar */
+    min-height: 100vh; /* Set a minimum height of the viewport height */
+    
+    display: flex;
+    flex-direction: column; /* Display items vertically */
+    padding: 20px; /* Add some padding for better spacing */
+    align-items: center; /* Center items horizontally */
+}
+
+/* Navbar list styles */
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Navbar item styles */
+.navbar li {
+    margin-bottom: 20px; /* Adjust the spacing between items as needed */
+}
+
+
+/* Style the rectangular boxes */
+.navbar-link {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 18px; /* Adjust the font size for the text */
+    display: flex;
+    align-items: center; /* Center text vertically within the box */
+    justify-content: center; /* Center text horizontally within the box */
+    background-color: #333; /* Background color matching the Navbar */
+    border: 2px solid #555; /* Lighter outline color */
+    border-radius: 0; /* Remove rounded corners */
+    min-height: 60px; /* Set a minimum height for the boxes */
+    width: 100%; /* Extend the boxes across the full width of the navbar */
+    padding: 0; /* Remove padding to make boxes touch each other */
+    margin: 0; /* Remove margin between the boxes */
+}
+
+
+
+
+/* Style the rectangular boxes on hover */
+.navbar-link:hover {
+    background-color: #35CA0E; /* Change background color on hover to match the Navbar on hover */
+}
+
+/* Style the buttons to have a rectangular look */
+.navbar .btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: #39FF14; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove the button border */
+    border-radius: 5px; /* Add rounded corners */
+    padding: 10px; /* Add padding for better appearance */
+    font-weight: bold;
+    text-transform: uppercase; /* Transform text to uppercase */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add a smooth hover effect */
+}
+
+/* Style the buttons on hover */
+.navbar .btn:hover {
+    background-color: #35CA0E; /* Change background color on hover */
+}
+
+/* Additional styles for your specific layout */
+.navbar-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Style the title */
+.navbar-title {
+    font-size: 24px;
+    color: #fff;
+    margin: 0;
+    padding: 10px;
+}
+
+/* Style the user icon */
+.user-icon {
+    margin-bottom: 0px;
+}
+.menuitem {
+    margin-right: 20px;
+}
+

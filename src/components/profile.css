@@ -1,0 +1,30 @@
+/* profile.css */
+.profile-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  
+  .profile-content {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-content h2 {
+    margin-bottom: 20px;
+  }
+  
+  .profile-content label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .profile-content p {
+    margin-bottom: 20px;
+  }
+  
