@@ -5,21 +5,21 @@ import axios from "axios"
 
 const Dmenu = () => {
   const [dailyMenu, setDailyMenu] = useState([]);
-  const [selectedDay, setSelectedDay] = useState('monday');
+  const [selectedDay, setSelectedDay] = useState('Monday');
 
-  const daysOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+  const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
   useEffect(() => {
     fetchDailyMenu(selectedDay);
   }, [selectedDay]);
 
   const fetchDailyMenu = (day) => {
-    axios.post(`http://localhost:5000/dailymenu/${day}`)
+    axios.get(`http://localhost:5000/api/dailymenu/${day}`)
       
-      .then((data) => setDailyMenu(data))
+      .then((res,req) => setDailyMenu(res.data.data))
       .catch((error) => console.error('Error fetching daily menu:', error));
   };
-  console.log(dailyMenu)
+  
   return (
     <div className="dmenu">
       <header>
@@ -35,6 +35,9 @@ const Dmenu = () => {
             </button>
 )})}
         </div>
+        <div className="menuitem">{dailyMenu.item}</div>
+        <div className="menuitem">{dailyMenu.price}</div>
+        <div className="menuitem">{dailyMenu.description}</div> 
 
         <ul>
 

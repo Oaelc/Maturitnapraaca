@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
     <nav className="navbar">
       <div className="navbar-content">
         <Link to="/">
-          <h2 className="navbar-title">Restaurant Name</h2>
+          <h2 className="navbar-title">Rštaurácia</h2>
         </Link>
         <div
           onClick={handleProfileClick}

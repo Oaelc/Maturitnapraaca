@@ -27,11 +27,6 @@ const Menu = () => {
 
   return (
     <div className="dmenu">
-      <header>
-        <Link to="/">Go Back</Link>
-       
-      </header>
-
       <main className="menucontent">
         <div>
           <h2>Menu</h2>
