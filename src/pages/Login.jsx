@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -24,8 +25,14 @@ export default function Login() {
       });
 
       // Save the authentication token in localStorage
+      console.log(response.data.user_id);
+      localStorage.setItem("user_id", response.data.user_id);
       localStorage.setItem('authToken', response.data.token);
+      localStorage.setItem("id", response.data.id);
       localStorage.setItem('username', JSON.stringify(username));
+      localStorage.setItem('isadmin', response.data.isadmin);
+      console.log(localStorage.getItem("isadmin"))
+      console.log("Login Response:", response);
 
      
       navigate('../profile');

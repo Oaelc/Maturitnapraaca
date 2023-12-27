@@ -1,0 +1,23 @@
+.homepage {
+    position: relative;
+    min-height: 100vh; /* This ensures at least the full viewport height is covered */
+    width: 100vw; /* This ensures the full viewport width is covered */
+    background-attachment: fixed; /* Key for parallax effect */
+    background-image: url("retika.jpg"); /* Ensure this path is correct */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center; /* This will be visible if the image fails to load */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Aligns children to the start of the flex container */
+    align-items: stretch; /* Stretches children to fill the width */
+    
+}
+
+  
+  .homecontent {
+    position: relative;
+    z-index: 1; /* Ensures content is above the background */
+    /* Your existing styles for homecontent */
+  }
+  

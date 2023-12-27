@@ -34,7 +34,7 @@ const Menu = () => {
             <div key={index}>
               <ul >
                 <div className="menuitem">{item.item}</div>
-                <div className="menuitem">{item.price}</div>
+                <div className="menuitem">{item.price}$</div>
                 <div className="menuitem">{item.description}</div>
 
               </ul>

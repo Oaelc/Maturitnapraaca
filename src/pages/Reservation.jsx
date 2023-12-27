@@ -1,4 +1,3 @@
-// ReservationForm.jsx
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Styles/styles.css";
@@ -7,12 +6,11 @@ import { Calendar } from "react-calendar";
 import axios from "axios";
 import Ordermenu from "../components/ordermenu";
 
-function makeReservation() {
-  const [reservationDate, setReservationDate] = useState("");
-  const [table, setTable] = useState(0);
-  const navigate = useNavigate();
+function MakeReservation() {
   const [datee, setDate] = useState(new Date());
+  const [table, setTable] = useState(0);
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const authToken = localStorage.getItem("authToken");
@@ -21,63 +19,49 @@ function makeReservation() {
     }
   }, [navigate]);
 
-  const onReserve = () => {
-    const requestData = { reservationDate: datee, tableNumber: table };
-    axios
-      .post(`http://localhost:5000/reservation/makereservation`, requestData)
+  const handleReserve = async () => {
+    const authToken = localStorage.getItem("authToken");
+    if (!authToken) {
+      navigate("../login");
+      return;
+    }
 
-      .then((res, req) => setMessage("Table reserved succesfully"))
-      .catch((error) => setMessage("Table not reserved"));
+    const userId = localStorage.getItem("user_id");
+    const zvoleneMenus = JSON.parse(localStorage.getItem("zvoleneMenus") || "[]");
+
+    try {
+      const reservationResponse = await axios.post('http://localhost:5000/reservation/makereservation', {
+        reservationDate: datee,
+        tableNumber: table,
+        userId
+      });
+
+      await axios.post('http://localhost:5000/order/makeorder', {
+        reservation_id: reservationResponse.data.reservationId,
+        menu_id: zvoleneMenus
+      });
+
+      setMessage("Table and menu items reserved successfully");
+    } catch (error) {
+      setMessage("Error in reservation");
+    }
   };
 
-  const handleReserve = () => {
-    // Perform validation if needed
-
-    // Call the parent component's onReserve function with the reservation details
-    console.log(datee,table)
-    onReserve();
-
-    // Clear the form after submitting
-    setReservationDate("");
-    setTable("");
-  };
-
-  const disablePastDates = (date) => {
-    return date < new Date(); 
-  };
-
+  const disablePastDates = (date) => date < new Date();
 
   return (
     <div>
       <h2>Make a Reservation</h2>
-      <Calendar value={datee} onChange={(e) => setDate(e)} 
-      minDate={new Date()}
-      tileDisabled={disablePastDates}/>
+      <Calendar value={datee} onChange={setDate} minDate={new Date()} tileDisabled={disablePastDates} />
       <br />
       <label>Table Number: </label>
-      <input
-        type="number"
-        value={table}
-        onChange={(e) => setTable(e.target.value)}
-        min={0}
-      />
+      <input type="number" value={table} onChange={(e) => setTable(e.target.value)} min={0} />
       <br />
       <button onClick={handleReserve}>Reserve</button>
-      {message !== "" && (
-        <div>
-          {message}{" "}
-          <div
-            onClick={() => {
-              setMessage("");
-            }}
-          >
-            Ok
-          </div>
-        </div>
-      )}
+      {message && <div>{message} <span onClick={() => setMessage("")}>Ok</span></div>}
       <Ordermenu />
     </div>
   );
-};
+}
 
-export default makeReservation;
+export default MakeReservation;

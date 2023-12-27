@@ -62,7 +62,7 @@ async function Login(req, res) {
     req.session.user = user;
     req.session.isAuth = true;
 
-    res.status(200).json({ message: 'You have been successfully logged in!'});
+    res.status(200).json({user_id: user.id, isadmin: user.isadmin,message: 'You have been successfully logged in!'});
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ error: 'Internal server error', details: error.message });

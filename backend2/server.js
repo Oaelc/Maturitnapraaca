@@ -10,8 +10,8 @@ const userRoutes = require('./routes/user');
 const { Logout, getUserDetails } = require('./controllers/userController');
 const { getDailyMenu } = require('./controllers/dailymenuController');
 const reservationRoutes= require('./routes/reservation');
-
-
+const orderRoutes= require('./routes/order');
+const objednavkyRoutes = require('./routes/checkorder');
 
 app.use(express.json());
 app.use(cors({
@@ -36,7 +36,9 @@ app.use("/api/user",getUserDetails)
 app.use("/api/logout",Logout)
 app.use('/menu', menuRoutes); // Use menuRoutes for the '/menu' endpoint
 app.use('/reservation', reservationRoutes); // Use menuRoutes for the '/menu' endpoint
+app.use("/order",orderRoutes);
 app.use('/api/dailymenu', dailyMenuRoutes); // Use dailyMenuRoutes for the '/dailymenu' endpoint
+app.use('/objednavky', objednavkyRoutes);
 // Handling preflight request
 
 app.listen(5000, async () => {

@@ -46,7 +46,7 @@
 
 /* Style the rectangular boxes on hover */
 .navbar-link:hover {
-    background-color: #35CA0E; /* Change background color on hover to match the Navbar on hover */
+    background-color: #5f0eca; /* Change background color on hover to match the Navbar on hover */
 }
 
 /* Style the buttons to have a rectangular look */
@@ -54,7 +54,7 @@
     display: block;
     width: 100%;
     text-align: center;
-    background-color: #39FF14; /* Button background color */
+    background-color: #5714ff; /* Button background color */
     color: white; /* Button text color */
     border: none; /* Remove the button border */
     border-radius: 5px; /* Add rounded corners */
@@ -65,10 +65,7 @@
     transition: background-color 0.3s ease; /* Add a smooth hover effect */
 }
 
-/* Style the buttons on hover */
-.navbar .btn:hover {
-    background-color: #35CA0E; /* Change background color on hover */
-}
+
 
 /* Additional styles for your specific layout */
 .navbar-content {

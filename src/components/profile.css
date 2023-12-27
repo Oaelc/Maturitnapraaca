@@ -1,30 +1,45 @@
 /* profile.css */
 .profile-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-  }
-  
-  .profile-content {
-    text-align: center;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .profile-content h2 {
-    margin-bottom: 20px;
-  }
-  
-  .profile-content label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-  
-  .profile-content p {
-    margin-bottom: 20px;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.profile-content {
+  text-align: center;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: white;
+  max-width: 400px;
+  margin: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Choose a font that you like */
+}
+
+.user-info p {
+  font-size: 1.2em; /* Larger font size for better readability */
+  margin: 10px 0; /* Spacing between lines */
+}
+
+/* Logout button styling */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  letter-spacing: 0.05em;
+  transition: background-color 0.3s ease;
+  padding: 10px 20px; /* Bigger button padding */
+  font-size: 1em; /* Bigger font size for button text */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+/* Extra styles if needed */
+/* Adjust the spacing and alignment */
+.mt-4 {
+  margin-top: 1.5em;
+}

@@ -15,8 +15,9 @@ const Dmenu = () => {
 
   const fetchDailyMenu = (day) => {
     axios.get(`http://localhost:5000/api/dailymenu/${day}`)
-      
-      .then((res,req) => setDailyMenu(res.data.data))
+      .then((res) => {
+        setDailyMenu(res.data); // Assuming res.data is an array of menu items
+      })
       .catch((error) => console.error('Error fetching daily menu:', error));
   };
   
@@ -29,19 +30,20 @@ const Dmenu = () => {
         <h2>Daily Menu</h2>
         
         <div>
-          {daysOfWeek.map((day) => { return(
+          {daysOfWeek.map((day) => (
             <button key={day} onClick={() => setSelectedDay(day)}>
-              {day.charAt(0).toUpperCase() + day.slice(1)}
+              {day}
             </button>
-)})}
+          ))}
         </div>
-        <div className="menuitem">{dailyMenu.item}</div>
-        <div className="menuitem">{dailyMenu.price}</div>
-        <div className="menuitem">{dailyMenu.description}</div> 
 
-        <ul>
-
-        </ul>
+        {dailyMenu.map((menu, index) => (
+          <div key={index} className="menuitem">
+            <div>{menu.item}</div>
+            <div>{menu.price}$</div>
+            <div>{menu.description}</div>
+          </div>
+        ))}
       </main>
     </div>
   );
