@@ -1,23 +1,46 @@
 .homepage {
-    position: relative;
-    min-height: 100vh; /* This ensures at least the full viewport height is covered */
-    width: 100vw; /* This ensures the full viewport width is covered */
-    background-attachment: fixed; /* Key for parallax effect */
-    background-image: url("retika.jpg"); /* Ensure this path is correct */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center; /* This will be visible if the image fails to load */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Aligns children to the start of the flex container */
-    align-items: stretch; /* Stretches children to fill the width */
-    
+  position: relative;
+  min-height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  background-image: url("path-to-your-background-image.jpg"); /* Replace with your actual background image path */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
 }
 
-  
-  .homecontent {
-    position: relative;
-    z-index: 1; /* Ensures content is above the background */
-    /* Your existing styles for homecontent */
-  }
-  
+.homecontent {
+  position: relative;
+  z-index: 2; /* Ensures content is above the background */
+}
+
+.carousel-item img {
+  width: 100%; /* Full width */
+  height: 500px; /* Fixed height, adjust as needed */
+  object-fit: cover; /* Covers the area, cropping the image if necessary */
+}
+
+.homepage-info {
+  color: #333; /* Text color */
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  margin-top: 20px; /* Space between carousel and info section */
+}
+
+.restaurant-description {
+  font-size: 1.2em; /* Larger text for description */
+  margin-bottom: 20px;
+}
+
+.restaurant-contact-info p {
+  font-size: 1em;
+  margin: 5px 0; /* Spacing between contact lines */
+}
+
+.restaurant-contact-info strong {
+  color: #d35400; /* Color for important text, adjust to your theme */
+  font-weight: bold;
+}

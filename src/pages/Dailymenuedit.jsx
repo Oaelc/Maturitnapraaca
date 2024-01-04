@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/navbar';
-import './Styles/styles.css';
 import axios from 'axios';
+import '../components/dailymenu.css'; // Make sure the CSS file is correctly imported
 
 const Dailymenuedit = () => {
   const navigate = useNavigate();
@@ -12,8 +11,8 @@ const Dailymenuedit = () => {
 
   useEffect(() => {
     const isadmin = localStorage.getItem('isadmin');
-    if (isadmin === null || isadmin === undefined || isadmin === 'false') {
-      navigate('../home');
+    if (isadmin !== 'true') {
+      navigate('/home');
     } else {
       fetchMenu();
     }
@@ -56,47 +55,55 @@ const Dailymenuedit = () => {
   };
 
   return (
-    <div className="dailymenuedit">
-      <header>
-        {/* Your Navbar component */}
-      </header>
-      <main>
-        <h2>Edit Daily Menu</h2>
-        <div>
-          <div>
-            <label htmlFor="item">Item:</label>
-            <input type="text" name="item" value={editedMenu.item} onChange={handleInputChange} />
-          </div>
-          <div>
-            <label htmlFor="price">Price:</label>
-            <input type="number" name="price" value={editedMenu.price} onChange={handleInputChange} />
-          </div>
-          <div>
-            <label htmlFor="description">Description:</label>
-            <textarea name="description" value={editedMenu.description} onChange={handleInputChange}></textarea>
-          </div>
-          <div>
-            <label htmlFor="day">Day:</label>
-            <select name="day" value={editedMenu.day} onChange={handleDayChange}>
-              {daysOfWeek.map(day => (
-                <option key={day} value={day}>{day}</option>
-              ))}
-            </select>
-          </div>
+    <div className="container mt-4">
+      <h2>Edit Daily Menu</h2>
+      <div className="menu-controls">
+        {/* Buttons for other controls can go here if needed */}
+      </div>
+      <div className="card mb-4">
+        <div className="card-body">
+          <form>
+            <div className="form-group mb-3">
+              <label htmlFor="item">Item:</label>
+              <input type="text" className="form-control" name="item" value={editedMenu.item} onChange={handleInputChange} />
+            </div>
+            <div className="form-group mb-3">
+              <label htmlFor="price">Price:</label>
+              <input type="number" className="form-control" name="price" value={editedMenu.price} onChange={handleInputChange} />
+            </div>
+            <div className="form-group mb-3">
+              <label htmlFor="description">Description:</label>
+              <textarea className="form-control" name="description" value={editedMenu.description} onChange={handleInputChange}></textarea>
+            </div>
+            <div className="form-group mb-3">
+              <label htmlFor="day">Day:</label>
+              <select className="form-control" name="day" value={editedMenu.day} onChange={handleDayChange}>
+                {daysOfWeek.map(day => (
+                  <option key={day} value={day}>{day}</option>
+                ))}
+              </select>
+            </div>
+            <div className="form-group">
+              <button type="button" className="btn btn-success" onClick={handleSubmit}>Submit</button>
+            </div>
+          </form>
         </div>
-        <button onClick={handleSubmit}>Submit</button>
-        <div>
+      </div>
+      <div className="card menu-list">
+        <div className="card-header">
           <h3>Current Menu</h3>
-          <ul>
-            {menuItems.map((item) => (
-              <li key={item.id}>
-                {item.item} - {item.price} - {item.description}
-                <button onClick={() => handleDelete(item.id)}>Delete</button>
-              </li>
-            ))}
-          </ul>
         </div>
-      </main>
+        <ul className="list-group list-group-flush">
+          {menuItems.map((item) => (
+            <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                {item.item} - {item.price}$ - {item.description}
+              </div>
+              <button className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

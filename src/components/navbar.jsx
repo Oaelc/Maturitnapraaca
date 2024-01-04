@@ -6,7 +6,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';  // Make sure this i
 import { useAuth } from '../pages/authContext'; // Import useAuth from authContext
 import './navbar.css';
 
-// ... (other imports)
+
 
 const Navbar= () => {
   const { user } = useAuth();
@@ -25,8 +25,8 @@ const Navbar= () => {
   return (
     <nav className="navbar">
       <div className="navbar-content">
-        <Link to="/">
-          <h2 className="navbar-title">Rštaurácia</h2>
+        <Link to="/"  className="navbar-title">
+        Vrbový Prístav
         </Link>
         <div onClick={handleProfileClick} className="navbar-link">
           <FontAwesomeIcon icon={faUser} className="user-icon" />
@@ -48,8 +48,8 @@ const Navbar= () => {
           
         )}
         {isadmin === 'true' && (
-          <Link to="/Order" className="navbar-link">
-            Order
+          <Link to="/Orders" className="navbar-link">
+            Orders
           </Link>
           
         )}

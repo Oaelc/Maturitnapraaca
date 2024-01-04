@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Styles/styles.css';
 
@@ -8,29 +8,18 @@ const Menuedit = () => {
 
   useEffect(() => {
     const isadmin = localStorage.getItem('isadmin');
-    console.log(isadmin);
-
-    // Check if isadmin is null or undefined
-    if (isadmin === null || isadmin === undefined || isadmin === 'false') {
-      navigate('../home');
+    if (isadmin !== 'true') {
+      navigate('/home');
     }
   }, [navigate]);
 
-  return (
-    <div>
-      {/* Pass the isadmin value as a prop to the Menu component */}
-      <Menu isadmin={localStorage.getItem('isadmin')} />
-    </div>
-  );
+  return <Menu isadmin={localStorage.getItem('isadmin')} />;
 };
 
 const Menu = ({ isadmin }) => {
+  const navigate = useNavigate(); // Define navigate here
   const [menuData, setMenuData] = useState([]);
-  const [newItem, setNewItem] = useState({
-    item: '',
-    price: '',
-    description: '',
-  });
+  const [newItem, setNewItem] = useState({ item: '', price: '', description: '' });
 
   useEffect(() => {
     fetchMenuData();
@@ -42,8 +31,6 @@ const Menu = ({ isadmin }) => {
       if (response.ok) {
         const data = await response.json();
         setMenuData(data);
-      } else {
-        console.log('Failed to fetch menu data');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -52,15 +39,12 @@ const Menu = ({ isadmin }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewItem((prevItem) => ({ ...prevItem, [name]: value }));
+    setNewItem(prevItem => ({ ...prevItem, [name]: value }));
   };
 
   const handleAddItem = async () => {
     try {
-      // Convert the price to a floating-point number
       const priceFloat = parseFloat(newItem.price);
-
-      // Check if the conversion was successful
       if (isNaN(priceFloat)) {
         console.error('Invalid price format');
         return;
@@ -68,29 +52,13 @@ const Menu = ({ isadmin }) => {
 
       const response = await fetch('http://localhost:5000/menu', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...newItem,
-          price: priceFloat, // Use the converted price value
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...newItem, price: priceFloat }),
       });
 
-      console.log('Response:', response);
-
       if (response.ok) {
-        console.log('Menu item added successfully');
-        // Clear the form fields after a successful addition
-        setNewItem({
-          item: '',
-          price: '',
-          description: '',
-        });
-        // You may choose to refetch the menu data after adding a new item
+        setNewItem({ item: '', price: '', description: '' });
         fetchMenuData();
-      } else {
-        console.log('Failed to add a menu item');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -99,88 +67,77 @@ const Menu = ({ isadmin }) => {
 
   const handleDeleteItem = async (itemId) => {
     try {
-      console.log('Deleting item with ID:', itemId);
-  
-      const response = await fetch(`http://localhost:5000/menu/${itemId}`, {
-        method: 'DELETE',
-      });
-  
-      console.log('Response:', response);
-  
+      const response = await fetch(`http://localhost:5000/menu/${itemId}`, { method: 'DELETE' });
       if (response.ok) {
-        console.log('Menu item deleted successfully');
-        // You may choose to refetch the menu data after deleting an item
         fetchMenuData();
-      } else {
-        console.log('Failed to delete a menu item');
       }
     } catch (error) {
       console.error('Error:', error);
     }
   };
-  
 
   return (
-    <div className="dmenu">
-      <main className="menucontent">
-        <div>
-          <h2>Menu</h2>
-
-          {/* Form for adding a new menu item */}
-          {isadmin === 'true' && (
-            <Link to="/Dailymenuedit">
-                DailyMenuEdit
-            </Link>
-          )}
+    <div className="container mt-4">
+      <h2>Menu Management</h2>
+      {isadmin === 'true' && (
+        <button className="btn btn-primary mb-3" onClick={() => navigate('/Dailymenuedit')}>
+          Daily Menu
+        </button>
+      )}
+      <div className="card">
+        <div className="card-body">
           <form>
-            <label>
-              Item Name:
+            <div className="form-group mb-3">
+              <label htmlFor="item-name">Item Name:</label>
               <input
                 type="text"
+                className="form-control"
+                id="item-name"
                 name="item"
                 value={newItem.item}
                 onChange={handleInputChange}
               />
-            </label>
-            <br />
-            <label>
-              Price:
+            </div>
+            <div className="form-group mb-3">
+              <label htmlFor="item-price">Price:</label>
               <input
                 type="text"
+                className="form-control"
+                id="item-price"
                 name="price"
                 value={newItem.price}
                 onChange={handleInputChange}
               />
-            </label>
-            <br />
-            <label>
-              Description:
+            </div>
+            <div className="form-group mb-3">
+              <label htmlFor="item-description">Description:</label>
               <input
                 type="text"
+                className="form-control"
+                id="item-description"
                 name="description"
                 value={newItem.description}
                 onChange={handleInputChange}
               />
-            </label>
-            <br />
-            <button type="button" onClick={handleAddItem}>
+            </div>
+            <button type="button" className="btn btn-success" onClick={handleAddItem}>
               Add Item
             </button>
           </form>
-
-          {/* Display existing menu items */}
-          {menuData.map((item, index) => (
-            <div key={index}>
-              <ul>
-                <div className="menuitem">{item.item}</div>
-                <div className="menuitem">{item.price}$</div>
-                <div className="menuitem">{item.description}</div>
-                <button onClick={() => handleDeleteItem(item.id)}>Delete</button>
-              </ul>
-            </div>
-          ))}
         </div>
-      </main>
+      </div>
+      <div className="list-group mt-4">
+        {menuData.map((item, index) => (
+          <div key={index} className="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            <div>
+              <h5 className="mb-1">{item.item}</h5>
+              <p className="mb-1">{item.price}$</p>
+              <small>{item.description}</small>
+            </div>
+            <button className="btn btn-danger" onClick={() => handleDeleteItem(item.id)}>Delete</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

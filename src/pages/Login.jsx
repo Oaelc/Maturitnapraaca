@@ -17,67 +17,71 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
-  async function handleLoginSubmit() {
+  const handleLoginSubmit = async (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
     try {
       const response = await axios.post('http://localhost:5000/api/login', {
         username: username,
         password: password,
       });
 
-      // Save the authentication token in localStorage
-      console.log(response.data.user_id);
       localStorage.setItem("user_id", response.data.user_id);
       localStorage.setItem('authToken', response.data.token);
       localStorage.setItem("id", response.data.id);
       localStorage.setItem('username', JSON.stringify(username));
       localStorage.setItem('isadmin', response.data.isadmin);
-      console.log(localStorage.getItem("isadmin"))
-      console.log("Login Response:", response);
 
-     
       navigate('../profile');
     } catch (error) {
       alert(error.response.data.error);
     }
-  }
+  };
 
   useEffect(() => {
-    // Check if the user is already authenticated
     const authToken = localStorage.getItem('authToken');
     if (authToken) {
       navigate('../profile');
     }
-  }, []); // Empty dependency array ensures this effect runs only once on component mount
-  
-  return (
-    <div className="login-container">
-      <div className="login-content">
-        <h2>Login</h2>
+  }, [navigate]);
 
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={username}
-            onChange={handleUsernameChange}
-          />
+  return (
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card p-4">
+            <div className="card-body">
+              <h2 className="text-center mb-4">Login</h2>
+              <form onSubmit={handleLoginSubmit}>
+                <div className="form-group mb-3">
+                  <label htmlFor="username">Username:</label>
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    className="form-control"
+                    value={username}
+                    onChange={handleUsernameChange}
+                  />
+                </div>
+                <div className="form-group mb-3">
+                  <label htmlFor="password">Password:</label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    className="form-control"
+                    value={password}
+                    onChange={handlePasswordChange}
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary w-100">Login</button>
+                <div className="mt-3 text-center">
+                  <Link to="../register">Don't have an account? Register</Link>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
-        <button onClick={handleLoginSubmit} type="submit">
-          Login
-        </button>
-        <Link to="../register">Register</Link>
       </div>
     </div>
   );

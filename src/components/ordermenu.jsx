@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 
 const Ordermenu = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -9,10 +10,9 @@ const Ordermenu = () => {
   useEffect(() => {
     const fetchMenuData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/menu'); // Replace with your actual API endpoint
-        if (response.ok) {
-          const data = await response.json();
-          setMenuItems(data);
+        const response = await axios.get('http://localhost:5000/menu');
+        if (response.status === 200) {
+          setMenuItems(response.data.map(item => ({ ...item, selected: false })));
         } else {
           console.log('Failed to fetch menu data');
         }
@@ -25,54 +25,55 @@ const Ordermenu = () => {
   }, []);
 
   const handleCheckboxChange = (index, itemPrice, itemId) => {
-    let updatedMenuItems = [...menuItems];
-    
+    let newSum = suma;
+    let newZvoleneMenus = [...zvoleneMenus];
+    const updatedMenuItems = [...menuItems];
     updatedMenuItems[index].selected = !updatedMenuItems[index].selected;
-    const roundedPrice = +itemPrice.toFixed(2); // Change '2' to the desired number of decimal places
 
     if (updatedMenuItems[index].selected) {
-      setSuma((prevSuma) => prevSuma + roundedPrice);
+      newSum += itemPrice;
+      newZvoleneMenus = [...newZvoleneMenus, itemId];
     } else {
-      setSuma((prevSuma) => +(prevSuma - roundedPrice).toFixed(2));
+      newSum -= itemPrice;
+      newZvoleneMenus = newZvoleneMenus.filter(id => id !== itemId);
     }
 
-    if (zvoleneMenus.includes(itemId)) {
-      setZvoleneMenus((prevMenus) => {
-        const updatedMenus = prevMenus.filter((item) => item !== itemId);
-        localStorage.setItem("zvoleneMenus", JSON.stringify(updatedMenus));
-        return updatedMenus;
-      });
-    } else {
-      setZvoleneMenus((prevMenus) => {
-        const updatedMenus = [...prevMenus, itemId];
-        localStorage.setItem("zvoleneMenus", JSON.stringify(updatedMenus));
-        return updatedMenus;
-      });
-    }
-  
+    setSuma(newSum);
+    setZvoleneMenus(newZvoleneMenus);
+    localStorage.setItem('zvoleneMenus', JSON.stringify(newZvoleneMenus));
     setMenuItems(updatedMenuItems);
   };
 
   return (
-    <div className="menuWindow">
-      <h3>Menu Items</h3>
-      <p>{suma}$</p>
-      <ul>
+    <div className="container menuWindow mt-4">
+      <h3 className="mb-4 text-center">Select Menu Items</h3>
+      <div className="total-sum mb-3">
+        <p className="font-weight-bold text-primary">Total: <span className="text-success">{suma.toFixed(2)}$</span></p>
+      </div>
+      <ul className="list-group">
         {menuItems.map((item, index) => (
-          <li key={index}>
-            <div className="mealItem">
-              <div>
-                <div className="menuitem">{item.item}</div>
-                <div className="menuitem">{item.price}$</div>
-                <div className="menuitem">{item.description}</div>
-              </div>
-              <div className="checkboxContainer">
-                <input
-                  type="checkbox"
-                  checked={item.selected || false}
-                  onChange={() => handleCheckboxChange(index, +item.price.toFixed(2), item.id)}
-                />
-              </div>
+          <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <h5 className="mb-1">{item.item}</h5>
+              <p className="mb-0">Price: <span className="font-weight-bold">{item.price}$</span></p>
+              <small>{item.description}</small>
+            </div>
+            <div>
+              {item.selected ? (
+                <button
+                  className="btn btn-danger"
+                  onClick={() => handleCheckboxChange(index, item.price, item.id)}
+                >
+                  Delete
+                </button>
+              ) : (
+                <button
+                  className="btn btn-success"
+                  onClick={() => handleCheckboxChange(index, item.price, item.id)}
+                >
+                  Add
+                </button>
+              )}
             </div>
           </li>
         ))}

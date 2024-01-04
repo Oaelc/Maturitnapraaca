@@ -1,93 +1,73 @@
 /* Navbar container styles */
 .navbar {
-    background-color: #333; /* Background color for the Navbar */
-    width: 200px; /* Width of the Navbar */
-    min-height: 100vh; /* Set a minimum height of the viewport height */
-    
-    display: flex;
-    flex-direction: column; /* Display items vertically */
-    padding: 20px; /* Add some padding for better spacing */
-    align-items: center; /* Center items horizontally */
-}
-
-/* Navbar list styles */
-.navbar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-/* Navbar item styles */
-.navbar li {
-    margin-bottom: 20px; /* Adjust the spacing between items as needed */
-}
-
-
-/* Style the rectangular boxes */
-.navbar-link {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 18px; /* Adjust the font size for the text */
-    display: flex;
-    align-items: center; /* Center text vertically within the box */
-    justify-content: center; /* Center text horizontally within the box */
-    background-color: #333; /* Background color matching the Navbar */
-    border: 2px solid #555; /* Lighter outline color */
-    border-radius: 0; /* Remove rounded corners */
-    min-height: 60px; /* Set a minimum height for the boxes */
-    width: 100%; /* Extend the boxes across the full width of the navbar */
-    padding: 0; /* Remove padding to make boxes touch each other */
-    margin: 0; /* Remove margin between the boxes */
-}
-
-
-
-
-/* Style the rectangular boxes on hover */
-.navbar-link:hover {
-    background-color: #5f0eca; /* Change background color on hover to match the Navbar on hover */
-}
-
-/* Style the buttons to have a rectangular look */
-.navbar .btn {
-    display: block;
-    width: 100%;
-    text-align: center;
-    background-color: #5714ff; /* Button background color */
-    color: white; /* Button text color */
-    border: none; /* Remove the button border */
-    border-radius: 5px; /* Add rounded corners */
-    padding: 10px; /* Add padding for better appearance */
-    font-weight: bold;
-    text-transform: uppercase; /* Transform text to uppercase */
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Add a smooth hover effect */
-}
-
-
-
-/* Additional styles for your specific layout */
-.navbar-content {
+    background-color: #2c3e50;
+    color: #ffffff;
+    width: 250px;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    padding: 0; /* Set padding to 0 */
     align-items: center;
+}
+
+/* Style the navbar links */
+.navbar-link {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+    font-size: 25px;
+    width: 100%; /* Take up full width */
+    padding: 30px 15px; /* Padding inside the buttons */
     text-align: center;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box; /* Include padding and border in the width */
+    margin: 0; /* No margin to make buttons touch each other */
+    border-radius: 0; /* No rounded corners */
+    border-top: 1px solid #31465c; /* Top border only */
+    border-bottom: 1px solid #31465c; /* Bottom border only */
 }
 
-/* Style the title */
+/* Remove top border from the first link and bottom border from the last link */
+.navbar-link:first-child {
+    border-top: none;
+}
+
+.navbar-link:last-child {
+    border-bottom: none;
+}
+
+/* Hover effect for navbar links */
+
+.navbar-link:hover, .navbar-link:focus {
+    background-color: #34495e;
+    color: #ecf0f1 !important; /* Adding !important to ensure this color is applied */
+    border-color: #364758; /* Border color on hover */
+}
+
+
+
+/* Style the navbar title */
+/* Style the navbar title */
 .navbar-title {
-    font-size: 24px;
-    color: #fff;
-    margin: 0;
-    padding: 10px;
+    text-decoration: none; /* Remove underline from link */
+    color: #f8f9fa;
+    margin-bottom: 20px;
+    font-size: 30px; /* Increase font size */
+    font-weight: 800; /* Make the font bolder */
+    text-align: center;
+    background-color: #2980b9; /* Add a distinct background color */
+    padding: 15px 30px; /* Add padding for better spacing */
+    border-radius: 10px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
 }
 
-/* Style the user icon */
-.user-icon {
-    margin-bottom: 0px;
-}
-.menuitem {
-    margin-right: 20px;
+.navbar-title:hover {
+    transform: translateY(-2px); /* Slight upward movement on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
 }
 
+.navbar-link.active {
+    background-color: #2980b9;
+    color: #ffffff;
+}

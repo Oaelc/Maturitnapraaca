@@ -1,10 +1,6 @@
 import React from 'react';
-import Navbar from '../components/navbar';
 import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
-import "../components/home.css"
-// Import your images
 import firstSlideImage from '../images/shrecik2.jpg'; // Update the path as necessary
 import secondSlideImage from '../images/shrecik3.jpg'; // Update the path as necessary
 import thirdSlideImage from '../images/shrecikjpg.jpg'; // Update the path as necessary
@@ -12,10 +8,6 @@ import thirdSlideImage from '../images/shrecikjpg.jpg'; // Update the path as ne
 const Home: React.FC = () => {
   return (
     <div className="homepage">
-      <header>
-        
-      </header>
-      
       <main className="homecontent">
         <Carousel>
           <Carousel.Item>
@@ -52,6 +44,15 @@ const Home: React.FC = () => {
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
+        <div className="homepage-info">
+          <p className="restaurant-description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus. 
+          </p>
+          <div className="restaurant-contact-info">
+            <p><strong>Address:</strong> 1234 Delight Street, FoodVille, FL 56789</p>
+            <p><strong>Phone:</strong> (123) 456-7890</p>
+          </div>
+        </div>
       </main>
     </div>
   );

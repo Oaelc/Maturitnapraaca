@@ -1,4 +1,4 @@
-// Profile.js
+// Profile.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -43,17 +43,16 @@ export default function Profile() {
 
   return (
     <div className="profile-container">
-      <div className="profile-page"> {/* Updated class name */}
-      <div className="profile-content bg-light p-4 rounded shadow">
-        <h2 className="mb-4">Profile Page</h2>
-        <p>Username: {user.username}</p>
-        <p>Points: {user.points}</p>
-        <p>User ID: {user.id}</p>
-        <p>Admin: {user.isadmin ? 'Yes' : 'No'}</p>
-        {user.username === undefined && <div className="alert alert-warning">You forgot to turn on the backend</div>}
-        <button onClick={handleLogout} className="btn btn-primary">Logout</button>
+      <div className="profile-content">
+        <span className="user-info">{user.username}</span>
+        <span className="user-info">{user.points}</span>
+        <span className="user-info">{user.id}</span>
+        <span className="user-info">{user.isadmin ? 'Yes' : 'No'}</span>
       </div>
-    </div>
+      <button onClick={handleLogout} className="btn btn-primary logout-button">Logout</button>
+      {user.username === undefined && (
+        <div className="alert alert-warning">You forgot to turn on the backend</div>
+      )}
     </div>
   );
 }

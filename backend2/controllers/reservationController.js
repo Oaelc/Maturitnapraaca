@@ -1,48 +1,71 @@
-const prisma = require("../lib/prisma");
-const moment = require('moment-timezone');
+const prisma = require('../lib/prisma');
 
-async function makeReservation(req, res) {
+const makeReservation = async (req, res) => {
   try {
     const { reservationDate, tableNumber, userId } = req.body;
-    // Convert the incoming UTC date string back to a Date object
-    const reservationDateTimeUTC = moment.utc(reservationDate).toDate();
-    // Convert UTC time to local time ('Europe/Bratislava' timezone in this case)
-    const reservationDateTimeLocal = moment(reservationDateTimeUTC).tz('Europe/Bratislava').toDate();
-
-    // Check for existing reservations for this table within 1.5 hours of the requested time
-    const existingReservations = await prisma.reservation.findMany({
-      where: {
-        table: Number(tableNumber),
-        AND: [{
-          reservationDate: {
-            gte: new Date(reservationDateTimeLocal - 90 * 60 * 1000) // 1.5 hours before
-          }
-        }, {
-          reservationDate: {
-            lte: new Date(reservationDateTimeLocal.getTime() + 90 * 60 * 1000) // 1.5 hours after
-          }
-        }]
-      }
-    });
-
-    if (existingReservations.length > 0) {
-      return res.status(400).json({ error: 'Table is already booked for this time slot.' });
-    }
-
-    // Create new reservation with the local time
     const reservation = await prisma.reservation.create({
-      data: {
-        reservationDate: reservationDateTimeLocal,
-        table: Number(tableNumber),
-        userId: Number(userId)
-      }
+      data: { reservationDate, table: Number(tableNumber), userId: Number(userId) },
     });
 
-    res.status(200).json({ reservationId: reservation.id });
+    res.json({ reservationId: reservation.id });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+async function deleteReservation(req, res) {
+  try {
+    const reservationId = Number(req.params.reservationId);
+    await prisma.order.deleteMany({
+      where: { reservationId: reservationId },
+    });
+    await prisma.reservation.delete({
+      where: { id: reservationId },
+    });
+    res.json({ message: 'Reservation and related orders deleted successfully' });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 }
 
-module.exports = { makeReservation };
+const checkTableAvailability = async (req, res) => {
+  try {
+    const { reservationDate, tableNumber } = req.body;
+    const duration = 60 * 60000; // 1 hour
+
+    const requestedStartTime = new Date(reservationDate);
+    const requestedEndTime = new Date(requestedStartTime.getTime() + duration);
+
+    const overlappingReservation = await prisma.reservation.findFirst({
+      where: {
+        table: Number(tableNumber),
+        AND: [
+          {
+            reservationDate: {
+              lt: requestedEndTime
+            }
+          },
+          {
+            reservationDate: {
+              gte: requestedStartTime
+            }
+          }
+        ]
+      }
+    });
+
+    if (overlappingReservation) {
+      return res.status(409).json({ message: 'Table is already occupied at that time.' });
+    }
+
+    res.json({ message: 'Table is available.' });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
+module.exports = { makeReservation, deleteReservation, checkTableAvailability };

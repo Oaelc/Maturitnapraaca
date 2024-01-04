@@ -1,45 +1,41 @@
 /* profile.css */
+
 .profile-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f0f2f5;
+  justify-content: space-between; /* Space between content and logout */
+  align-items: flex-start; /* Align items to the top */
+  padding-top: 20px; /* Add padding at the top for some space */
+  margin-top: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  padding-right: 20px; /* Padding on the right for the logout button */
+  padding-left: 20px; /* Padding on the left for some space from the edge */
 }
 
 .profile-content {
-  text-align: center;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background: white;
-  max-width: 400px;
-  margin: auto;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Choose a font that you like */
+  display: flex;
+  align-items: flex-start; /* Align to the top */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-left: 0; /* Remove padding to align content to the very left */
 }
 
-.user-info p {
-  font-size: 1.2em; /* Larger font size for better readability */
-  margin: 10px 0; /* Spacing between lines */
+.user-info {
+  font-size: 2em; /* Larger font size for user info */
+  font-weight: bold;
+  margin-right: 20px; /* Space between items */
 }
 
-/* Logout button styling */
-.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-  letter-spacing: 0.05em;
-  transition: background-color 0.3s ease;
-  padding: 10px 20px; /* Bigger button padding */
-  font-size: 1em; /* Bigger font size for button text */
+.logout-button {
+  font-size: 1.5em; /* Larger font size for the logout button */
+  padding: 10px 20px;
+  margin-left: auto; /* Push the button to the right */
+  margin-right: 0; /* Align to the very right */
+  margin-top: 0; /* Align to the top */
 }
 
-.btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
-}
-
-/* Extra styles if needed */
-/* Adjust the spacing and alignment */
-.mt-4 {
-  margin-top: 1.5em;
+/* Ensure the alert is also positioned correctly */
+.alert-warning {
+  position: absolute;
+  top: 10px;
+  right: 20px;
 }

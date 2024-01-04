@@ -11,10 +11,9 @@ import LoginPage from './pages/Login';
 import ProfilePage from './pages/Profile';
 import RegistrationForm from './pages/Register';
 import ReservationForm from './pages/Reservation'; // Import the ReservationForm
-import Objednavky from "./pages/Objednavky";
 import Menuedit from "./pages/Menuedit";
 import Dailymenuedit from "./pages/Dailymenuedit"
-
+import ViewOrders from './pages/Objednavky';
 
 function App() {
   return (
@@ -31,10 +30,9 @@ function App() {
             <Route path="/Login" element={<LoginPage />} />
             <Route path="/Register" element={<RegistrationForm />} />
             <Route path="/Reservation" element={<ReservationForm />} />
-            <Route path="/Order" element={<Objednavky />} />
             <Route path="/Menuedit" element={<Menuedit />} />ň
             <Route path="/Dailymenuedit" element={<Dailymenuedit />} />
-
+            <Route path='/Orders' element={<ViewOrders />} />
             
           </Routes>
         </BrowserRouter>
