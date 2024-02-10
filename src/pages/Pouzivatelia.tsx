@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../components/navbar';
+import Navbar from '../pages/Styles/navbar.css';
 import "./Styles/styles.css"
 
 const Pouzivatelia: React.FC = () => {

@@ -15,25 +15,40 @@ const makeReservation = async (req, res) => {
 };
 
 async function deleteReservation(req, res) {
+  const reservationId = Number(req.params.reservationId);
+  console.log("Attempting to delete reservation with ID:", reservationId); // Console log for debugging
+
   try {
-    const reservationId = Number(req.params.reservationId);
-    await prisma.order.deleteMany({
-      where: { reservationId: reservationId },
-    });
-    await prisma.reservation.delete({
+    const existingReservation = await prisma.reservation.findUnique({
       where: { id: reservationId },
     });
-    res.json({ message: 'Reservation and related orders deleted successfully' });
+
+    if (!existingReservation) {
+      console.log(`Reservation with ID ${reservationId} not found`); // Additional log
+      return res.status(404).json({ error: `Reservation with ID ${reservationId} not found` });
+    }
+
+    await prisma.$transaction([
+      prisma.order.deleteMany({
+        where: { reservationId: reservationId },
+      }),
+      prisma.reservation.delete({
+        where: { id: reservationId },
+      })
+    ]);
+
+    res.json({ message: 'Order and reservation deleted successfully' });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 }
 
+
 const checkTableAvailability = async (req, res) => {
   try {
     const { reservationDate, tableNumber } = req.body;
-    const duration = 60 * 60000; // 1 hour
+    const duration = 90 * 60000; // 1.5 hours
 
     const requestedStartTime = new Date(reservationDate);
     const requestedEndTime = new Date(requestedStartTime.getTime() + duration);
@@ -44,16 +59,16 @@ const checkTableAvailability = async (req, res) => {
         AND: [
           {
             reservationDate: {
-              lt: requestedEndTime
-            }
+              lt: requestedEndTime,
+            },
           },
           {
             reservationDate: {
-              gte: requestedStartTime
-            }
-          }
-        ]
-      }
+              gte: new Date(requestedStartTime.getTime() - duration),
+            },
+          },
+        ],
+      },
     });
 
     if (overlappingReservation) {
@@ -66,6 +81,7 @@ const checkTableAvailability = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
 
 
 module.exports = { makeReservation, deleteReservation, checkTableAvailability };

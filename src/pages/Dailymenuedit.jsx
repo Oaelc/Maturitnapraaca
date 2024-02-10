@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../components/dailymenu.css'; // Make sure the CSS file is correctly imported
+import '../pages/Styles/dailymenu.css'; // Make sure the CSS file is correctly imported
 
 const Dailymenuedit = () => {
   const navigate = useNavigate();
@@ -97,7 +97,7 @@ const Dailymenuedit = () => {
           {menuItems.map((item) => (
             <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center">
               <div>
-                {item.item} - {item.price}$ - {item.description}
+                {item.item} - {item.price}$ - {item.description} - {item.day}
               </div>
               <button className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</button>
             </li>

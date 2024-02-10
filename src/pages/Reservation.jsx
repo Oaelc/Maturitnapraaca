@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Styles/styles.css';
+import '../pages/Styles/reservation.css';
 import 'react-calendar/dist/Calendar.css';
 import { Calendar } from 'react-calendar';
 import axios from 'axios';
@@ -19,6 +19,9 @@ function MakeReservation() {
     if (!authToken) {
       navigate('../login');
     }
+
+    // Clear previous meal selections from local storage
+    localStorage.removeItem("zvoleneMenus");
   }, [navigate]);
 
   const generateTimeOptions = () => {
@@ -44,13 +47,18 @@ function MakeReservation() {
       const response = await axios.post('http://localhost:5000/reservation/checkavailability', requestData);
       return response.data.message === 'Table is available.';
     } catch (error) {
-      console.error('Error checking table availability:', error);
+      if (error.response && error.response.status === 409) {
+        setMessage("Selected table is already reserved at this time. Please choose a different time or table.");
+      } else {
+        console.error('Error checking table availability:', error);
+        setMessage("An error occurred while checking table availability.");
+      }
       return false;
     }
   };
 
   const onReserve = async () => {
-    setMessage(""); // Clear previous messages
+    setMessage("");
     const authToken = localStorage.getItem("authToken");
     if (!authToken) {
       navigate("../login");
@@ -62,9 +70,15 @@ function MakeReservation() {
       return;
     }
 
-    const userId = localStorage.getItem("user_id");
     const zvoleneMenus = JSON.parse(localStorage.getItem("zvoleneMenus") || "[]");
+    console.log("Selected meals (zvoleneMenus):", zvoleneMenus); // Console log for debugging
 
+    if (zvoleneMenus.length === 0) {
+      setMessage("Reservation cannot be made without selecting a meal. Please select at least one meal from the menu.");
+      return;
+    }
+
+    const userId = localStorage.getItem("user_id");
     const reservationDateTime = new Date(datee);
     reservationDateTime.setHours(parseInt(reservationTime.split(':')[0]));
     reservationDateTime.setMinutes(parseInt(reservationTime.split(':')[1]));
@@ -77,19 +91,27 @@ function MakeReservation() {
 
     const isAvailable = await checkTableAvailability(requestData);
     if (!isAvailable) {
-      setMessage("Selected table is not available at this time.");
       return;
     }
 
-    axios.post('http://localhost:5000/reservation/makereservation', requestData)
-      .then((res) => {
-        setMessage("Table reserved successfully");
-        // Additional logic for handling the order can be placed here
-      })
-      .catch((error) => {
-        console.error('Error in making reservation:', error);
-        setMessage("Table not reserved due to an error");
-      });
+    try {
+      const reservationResponse = await axios.post('http://localhost:5000/reservation/makereservation', requestData);
+      setMessage("Table reserved successfully");
+
+      for (const menuId of zvoleneMenus) {
+        try {
+          await axios.post('http://localhost:5000/order/makeorder', {
+            reservation_id: reservationResponse.data.reservationId,
+            menu_id: menuId
+          });
+        } catch (error) {
+          console.error('Error creating order:', error);
+        }
+      }
+    } catch (error) {
+      console.error('Error in making reservation:', error);
+      setMessage("Table not reserved due to an error");
+    }
   };
 
   const disablePastDates = (date) => {

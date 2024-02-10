@@ -12,7 +12,7 @@ const Home: React.FC = () => {
         <Carousel>
           <Carousel.Item>
             <img
-              className="d-block w-100"
+              className="d-block carousel-image"
               src={firstSlideImage}
               alt="First slide"
             />
@@ -23,7 +23,7 @@ const Home: React.FC = () => {
           </Carousel.Item>
           <Carousel.Item>
             <img
-              className="d-block w-100"
+              className="d-block carousel-image"
               src={secondSlideImage}
               alt="Second slide"
             />
@@ -34,7 +34,7 @@ const Home: React.FC = () => {
           </Carousel.Item>
           <Carousel.Item>
             <img
-              className="d-block w-100"
+              className="d-block carousel-image"
               src={thirdSlideImage}
               alt="Third slide"
             />

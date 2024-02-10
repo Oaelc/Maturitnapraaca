@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../components/dailymenu.css';
+import '../pages/Styles/dailymenu.css';
 
 const Dmenu = () => {
   const [dailyMenu, setDailyMenu] = useState([]);
@@ -63,7 +63,7 @@ const Dmenu = () => {
         </Modal.Header>
         <Modal.Body>
           <p>{selectedItem?.description}</p>
-          <p>Price: {selectedItem?.price}$</p>
+          <p className="price">Price: {selectedItem?.price}$</p>
         </Modal.Body>
         <Modal.Footer>
           <button className="btn btn-secondary" onClick={handleCloseModal}>

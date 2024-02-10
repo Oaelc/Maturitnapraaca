@@ -12,7 +12,6 @@
 
 .dmenu {
   display: flex;
-
 }
 
 .menucontent {
@@ -21,7 +20,6 @@
   align-items: center;
   margin-top:auto;
 }
-
 
 .menuitem {
   margin: 10px 0;
@@ -48,6 +46,13 @@
 .navbar-link {
   margin: 10px 0;
 }
+
 .login-container{
   display: flex;
+}
+
+/* Overriding Bootstrap's hover effect for list group items */
+.list-group-item:hover {
+  background-color: #FA9D22 !important; /* Updated hover background color to yellow */
+  color: #0F172B !important; /* Updated hover text color to dark blue */
 }

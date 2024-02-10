@@ -1,0 +1,133 @@
+body {
+    background-color: #C0C1C4; /* Setting the background color for the whole page */
+}
+
+.dmenu-container {
+    width: 80%;
+    margin: auto;
+    background-color: #202130; /* Lighter than #31465c */
+    color: #4cef00; /* Dark yellow color for text */
+    border-radius: 5px; /* Rounded corners for the container */
+    padding: 20px; /* Padding inside the container */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    font-family: 'Arial', sans-serif; /* Consistent font family */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.modal-footer {
+    border: none; /* Remove borders */
+    outline: none; /* Remove outlines */
+    box-shadow: none; /* Remove box shadows */
+    padding: 0; /* Adjust padding */
+    margin: 0; /* Adjust margin */
+}
+
+.day-button, .btn-outline-primary {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    margin: 0 10px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #222;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: #0F172B; /* Dark blue background */
+    color: #fa9d22; /* Orange text color */
+    border-color: #0F172B; /* Border color to match the background */
+}
+
+.day-button:hover, .btn-outline-primary:hover {
+    background-color: #fa9d22; /* Orange background */
+    color: #0F172B; /* Dark blue text color */
+    border-color: #fa9d22; /* Border color to match the background */
+}
+
+.day-button.btn-primary, .day-button:active, .day-button:focus, .btn-primary {
+    background-color: #fa9d22 !important; /* Orange background */
+    color: #0F172B !important; /* Dark blue text color */
+    border-color: #fa9d22 !important; /* Border color to match the background */
+}
+
+.menu-items .card {
+    background-color:#0f172b ; /* Darker blue for card background */
+    color: #fff; /* Light yellow for card text */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners for cards */
+    margin-bottom: 15px;
+    box-shadow: 2px 2px 4px #222; /* Shadow for card depth */
+}
+
+.menu-items .card:hover {
+    background-color: #0f172b; 
+    transform: scale(1.05);
+}
+
+.menu-items .card .card-body {
+    padding: 15px; /* Padding inside the card */
+}
+
+.menu-items .card-subtitle {
+    font-size: 1.2em;
+    color: #ffffff; /* Changed to white for higher contrast */
+    font-weight: bold; /* Keep it bold for better visibility */
+    background-color: #645e4f; /* Optional: Add a background to make it stand out even more */
+    display: inline-block; /* Wrap the background around the text */
+    padding: 2px 6px; /* Add some padding around the text */
+    border-radius: 4px; /* Optional: Rounded corners for the background */
+    margin-bottom: 5px; /* Optional: Margin bottom for spacing */
+}
+
+.menu-items .card-title {
+    font-size: 1.5em;
+}
+
+.menu-items .card-subtitle {
+    font-size: 1.2em;
+    color: #2f00ff; /* Bright yellow for price */
+    font-weight: bold; /* Bold font for price */
+}
+
+.menu-items .card-text {
+    font-size: 1em;
+}
+
+/* Modal styling */
+.modal-content {
+    background-color: #2a3b4c; /* Slightly lighter than card for distinction */
+    color: #4400ff; /* Light yellow text to match the card text */
+    border-radius: 5px; /* Consistent rounded corners */
+    box-shadow: 2px 2px 4px #222; /* Consistent depth effect */
+}
+
+.modal-header, .modal-footer {
+    border-bottom: 1px solid #31465c; /* Subtle border for a slight separation */
+    background-color: #0F172B; /* Updated darker background for header and footer */
+}
+
+.modal-body {
+    background-color: #2a3b4c; /* Consistent with the modal-content background */
+}
+
+.modal-header .close {
+    color: #d2a43a; /* Using the dark yellow for visibility */
+}
+
+@media (max-width: 768px) {
+    .dmenu-container {
+        width: 95%;
+    }
+
+    .button-container {
+        flex-wrap: wrap;
+    }
+
+    .button-container .day-button {
+        flex: 1 1 auto;
+        margin-bottom: 10px;
+    }
+}

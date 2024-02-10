@@ -1,0 +1,58 @@
+/* profile.css */
+
+/* profile.css */
+
+.profile-container {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  padding-top: 20px;
+  width: 100%;
+  background-color: #C0C1C4; /* Updated background color */
+  color: #FA9D22; /* Updated yellow color for text */
+}
+
+
+.welcome-sign {
+  font-family: 'Arial', sans-serif; /* A clean, widely supported font */
+  font-size: 3em; /* Increase size for prominence */
+  font-weight: bold; /* Make it bold */
+  color: #FA9D22; /* Updated yellow for welcome sign */
+  text-shadow: 2px 2px 4px #222; /* Text shadow for depth */
+  margin-bottom: 20px;
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column; /* Stack user info vertically */
+  align-items: center; /* Center the items */
+  font-family: 'Arial', sans-serif; /* Consistent font family */
+}
+
+.user-info {
+  font-size: 1.8em; /* Slightly larger for better readability */
+  font-weight: bold;
+  color: #FA9D22; /* Updated light yellow to stand out against the background */
+  text-shadow: 1px 1px 2px #222; /* Soft shadow for readability */
+  margin-bottom: 10px; /* Space between items vertically */
+}
+
+.logout-button {
+  font-family: 'Arial', sans-serif; /* Consistent font family */
+  font-size: 1.2em;
+  font-weight: bold; /* Bold for button text */
+  color: #0F172B; /* Updated dark color for contrast */
+  text-shadow: 1px 1px 2px #FA9D22; /* Updated shadow that contrasts with the button color */
+  padding: 10px 20px;
+  background-color: #FA9D22; /* Updated dark yellow background for the button */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners for the button */
+  margin-top: 20px; /* Add space above the logout button */
+  box-shadow: 2px 2px 4px #222; /* Box shadow for a 3D effect */
+}
+
+.alert-warning {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}

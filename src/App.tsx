@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Dmenu from './pages/Dailymenu';
 import Menu from './pages/Menu';
-import Navbar from './components/Navbar';
+import Navbar from './components/navbar';
 import { AuthProvider } from './pages/authContext'; // Import the AuthProvider
 import PrivateRoute from './PrivateRoute';
 import LoginPage from './pages/Login';

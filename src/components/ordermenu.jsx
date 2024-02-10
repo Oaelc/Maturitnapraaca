@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import "../pages/Styles/ordermenu.css"
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+
 
 const Ordermenu = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -42,11 +44,13 @@ const Ordermenu = () => {
     setZvoleneMenus(newZvoleneMenus);
     localStorage.setItem('zvoleneMenus', JSON.stringify(newZvoleneMenus));
     setMenuItems(updatedMenuItems);
+
+    console.log("Updated selected meals:", newZvoleneMenus); // Console log for debugging
   };
 
   return (
     <div className="container menuWindow mt-4">
-      <h3 className="mb-4 text-center">Select Menu Items</h3>
+      <h3 className="mb-4 text-center">Select Meals From Menu</h3>
       <div className="total-sum mb-3">
         <p className="font-weight-bold text-primary">Total: <span className="text-success">{suma.toFixed(2)}$</span></p>
       </div>

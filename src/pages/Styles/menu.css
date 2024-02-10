@@ -1,0 +1,89 @@
+/* menu.css - make sure to include this with your other CSS files */
+
+.container {
+  font-family: 'Arial', sans-serif; /* Consistent font family as before */
+  color: #d2a43a; /* Dark yellow color for text to match the previous page */
+}
+
+h2 {
+  text-align: center; /* Center align the header */
+  color: #ffff; /* Dark yellow color for header to stand out */
+  font-size: 2.5rem; /* Larger font size for the header */
+  font-weight: bold; /* Bold font weight for header */
+  text-shadow: 1px 1px 2px #222; /* Text shadow for readability */
+  margin-bottom: 1rem; /* Space below the header */
+}
+
+.card {
+  background-color: #222431; /* Darker blue for card background */
+  color: #ffff; /* Light yellow for card text */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners for cards */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  transition: all 0.2s ease-in-out; /* Smooth transition for hover effect */
+}
+
+.card-hover:hover {
+  cursor: pointer;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  transform: scale(1.05); /* Slightly larger scale on hover for emphasis */
+}
+
+.card-body {
+  padding: 15px; /* Padding inside the card */
+}
+
+.card-title {
+  font-size: 1.5em; /* Larger font size for title */
+  color: #fa9d22; /* Dark yellow for title to match the theme */
+}
+
+.card-text {
+  font-size: 1em; /* Standard font size for text */
+}
+
+.card-footer {
+  background-color: #FFFF; /* Slightly lighter blue for footer */
+  color: #96880d; /* Light yellow for footer text */
+}
+
+.text-muted {
+  color: #fa9d22 !important; /* Bright yellow for price, overriding bootstrap's muted text color */
+  font-weight: bold; /* Bold font for price */
+}
+
+/* Modal styling - if you want to match it with the previous page's modal */
+.modal-content {
+  background-color: #2a3b4c; /* Slightly lighter than card for distinction */
+  color: #fa9d22; /* Light yellow text to match the card text */
+  border-radius: 5px; /* Consistent rounded corners */
+  box-shadow: 0px 0px 0px #222; /* Consistent depth effect */
+}
+
+.modal-header, .modal-footer {
+  border-bottom: 0px solid #ffffff;
+  border-top: 0px
+   /* Subtle border for a slight separation */
+  /* Darker background for header and footer */
+}
+.modal-body {
+  background-color:  #232430; /* Consistent with the modal-content background */
+}
+
+.modal-header .close {
+  color: #ff2f00; /* Using the dark yellow for visibility */
+}
+
+.btn-secondary {
+  background-color: #fa9d22; /* Button color to match the theme */
+  color: #ffffff; /* Text color to match the theme */
+  border: none; /* No border for a cleaner look */
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+  .container {
+      width: 95%;
+      margin: auto;
+  }
+}

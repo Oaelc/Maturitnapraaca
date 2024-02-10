@@ -3,7 +3,7 @@ const { makeReservation, deleteReservation, checkTableAvailability } = require('
 const router = express.Router();
 
 router.post('/makereservation', makeReservation);
-router.delete('/:reservationId', deleteReservation);
-router.post('/checkavailability', checkTableAvailability); // New route to check table availability
+router.delete('/reservation/:reservationId', deleteReservation); // Updated route
+router.post('/checkavailability', checkTableAvailability);
 
 module.exports = router;

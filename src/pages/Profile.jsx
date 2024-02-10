@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
-import '../components/profile.css'; // Ensure the correct path to your CSS file
+import '../pages/Styles/profile.css'; // Ensure the correct path to your CSS file
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -43,11 +43,8 @@ export default function Profile() {
 
   return (
     <div className="profile-container">
+      <div className="welcome-sign">Welcome, {user.username}</div>
       <div className="profile-content">
-        <span className="user-info">{user.username}</span>
-        <span className="user-info">{user.points}</span>
-        <span className="user-info">{user.id}</span>
-        <span className="user-info">{user.isadmin ? 'Yes' : 'No'}</span>
       </div>
       <button onClick={handleLogout} className="btn btn-primary logout-button">Logout</button>
       {user.username === undefined && (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "../components/menu.css";
+import "../pages/Styles/menu.css";
 
 const Menu = () => {
   const [menuData, setMenuData] = useState([]);

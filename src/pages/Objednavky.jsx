@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import '../pages/Styles/Objednavky.css';
 
 function ViewOrders() {
   const [orders, setOrders] = useState([]);
@@ -8,9 +9,6 @@ function ViewOrders() {
 
   useEffect(() => {
     const isadmin = localStorage.getItem('isadmin');
-    console.log(isadmin);
-
-    
     if (isadmin !== 'true') {
       navigate('/home'); 
     } else {
@@ -19,15 +17,9 @@ function ViewOrders() {
   }, [navigate]);
 
   const fetchOrders = async () => {
-    console.log("Sending request to fetch orders");
     try {
       const response = await axios.get('http://localhost:5000/order');
-      console.log("Orders:", response.data);
-      
-      // Initialize aggregatedOrders first before logging it
       const aggregatedOrders = aggregateOrdersByReservation(response.data);
-      console.log("Updated orders:", aggregatedOrders);
-      
       setOrders(aggregatedOrders);
     } catch (error) {
       console.error('Error fetching orders:', error);
@@ -35,33 +27,19 @@ function ViewOrders() {
   };
   
   const handleDeleteOrder = async (reservationId) => {
+    console.log("Deleting reservation with ID:", reservationId);
     try {
-      console.log(`Deleting reservation and orders for reservation ID: ${reservationId}`);
-      
-      // Delete the orders associated with the reservation
-      await axios.delete(`http://localhost:5000/order/${reservationId}`);
-    
-      // Delete the reservation
-      await axios.delete(`http://localhost:5000/reservation/${reservationId}`);
-    
-      // Update the state to remove the deleted reservation
-      const updatedOrders = orders.filter(order => order.id !== reservationId);
-      setOrders(updatedOrders);
+        await axios.delete(`http://localhost:5000/reservation/reservation/${reservationId}`);
+        const updatedOrders = orders.filter(order => order.id !== reservationId);
+        setOrders(updatedOrders);
     } catch (error) {
-      console.error('Error deleting order:', error);
+        console.error('Error deleting order:', error);
     }
-  };
-  
-  
-  
-  
-  
-  
-  
+};
+
 
   const aggregateOrdersByReservation = (orders) => {
     const groupedOrders = {};
-
     orders.forEach(order => {
       if (!groupedOrders[order.reservation.id]) {
         groupedOrders[order.reservation.id] = {
@@ -72,7 +50,6 @@ function ViewOrders() {
         groupedOrders[order.reservation.id].meals.push(order.menu.item);
       }
     });
-
     return Object.values(groupedOrders);
   };
 
@@ -92,7 +69,7 @@ function ViewOrders() {
           </thead>
           <tbody>
             {orders.map(order => (
-              <tr key={order.id}>
+              <tr key={order.id} className="order-row"> {/* Add the new class here */}
                 <td>{order.user?.username || 'N/A'}</td>
                 <td>{new Date(order.reservationDate).toLocaleDateString()}</td>
                 <td>{order.table}</td>
@@ -115,3 +92,5 @@ function ViewOrders() {
 }
 
 export default ViewOrders;
+
+

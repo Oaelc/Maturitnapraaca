@@ -1,0 +1,46 @@
+/* ordermenu.css */
+
+.container.menuWindow {
+    background-color: #232430; /* Updated dark blue color */
+    border-radius: 5px; /* Rounded corners */
+    padding: 1rem; /* Padding */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    color: #FA9D22; /* Updated yellow color for text */
+}
+
+h3 {
+    font-size: 2rem; /* Header size */
+    font-weight: bold; /* Bold font */
+    color: #FA9D22; /* Updated yellow color */
+    text-align: center; /* Centered text */
+    margin-bottom: 1rem; /* Spacing below header */
+}
+
+.total-sum p {
+    font-weight: bold; /* Bold font */
+    color: #FA9D22; /* Updated bright yellow for the word 'Total' */
+}
+
+.total-sum .text-success {
+    color: #28a745; /* More visible green color for price number */
+}
+
+.list-group-item {
+    background-color: #0F172B; /* Updated dark blue color */
+    color: #FA9D22; /* Updated yellow color for text */
+    border: none; /* No border */
+}
+
+.btn-danger, .btn-success {
+    border: none; /* No border */
+    margin: 5px; /* Spacing around button */
+}
+
+.btn-danger {
+    background-color: #a94442; /* Red color for delete button */
+}
+
+/* The color of the button 'Add' will not change as per your request */
+.btn-success {
+    background-color: #5cb85c; /* Green color for add button */
+}

@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';  // Make sure this import is complete
 import { useAuth } from '../pages/authContext'; // Import useAuth from authContext
-import './navbar.css';
+import '../pages/Styles/navbar.css';
 
 
 
