@@ -1,58 +1,93 @@
 /* profile.css */
-
-/* profile.css */
-
 .profile-container {
   display: flex;
-  flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center items horizontally */
-  padding-top: 20px;
+  flex-direction: column;
+  align-items: center; /* Center children horizontally */
+  padding: 20px;
+  background-color: #f5f5f5;
+  min-height: 100vh; /* Full height */
+  width: 100%; /* Full width */
+  box-sizing: border-box;
+}
+
+.card {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px 0; /* Spacing between cards */
+  border-radius: 8px;
+  overflow: hidden;
   width: 100%;
-  background-color: #C0C1C4; /* Updated background color */
-  color: #FA9D22; /* Updated yellow color for text */
+  max-width: 600px; /* Adjust the max-width as needed */
 }
 
-
-.welcome-sign {
-  font-family: 'Arial', sans-serif; /* A clean, widely supported font */
-  font-size: 3em; /* Increase size for prominence */
-  font-weight: bold; /* Make it bold */
-  color: #FA9D22; /* Updated yellow for welcome sign */
-  text-shadow: 2px 2px 4px #222; /* Text shadow for depth */
-  margin-bottom: 20px;
+.card-header {
+  background-color: #0F172B; /* Dark blue header for cards */
+  color: #FA9D22; /* Orange text */
+  padding: 15px 20px;
+  font-size: 1.25rem;
 }
 
-.profile-content {
-  display: flex;
-  flex-direction: column; /* Stack user info vertically */
-  align-items: center; /* Center the items */
-  font-family: 'Arial', sans-serif; /* Consistent font family */
+.card-body {
+  padding: 20px;
+  color: #333;
 }
 
-.user-info {
-  font-size: 1.8em; /* Slightly larger for better readability */
-  font-weight: bold;
-  color: #FA9D22; /* Updated light yellow to stand out against the background */
-  text-shadow: 1px 1px 2px #222; /* Soft shadow for readability */
-  margin-bottom: 10px; /* Space between items vertically */
+.order-history-card {
+  margin-top: 20px;
+}
+
+.reservation-history + .reservation-history {
+  border-top: 1px solid #e0e0e0; /* Add top border to all but first reservation history */
+}
+
+.order-details {
+  background-color: #f8f9fa; /* Light background for order details */
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
 }
 
 .logout-button {
-  font-family: 'Arial', sans-serif; /* Consistent font family */
-  font-size: 1.2em;
-  font-weight: bold; /* Bold for button text */
-  color: #0F172B; /* Updated dark color for contrast */
-  text-shadow: 1px 1px 2px #FA9D22; /* Updated shadow that contrasts with the button color */
+  background-color: #0F172B; /* Dark blue color for logout button */
+  color: #FA9D22; /* Orange text */
+  border: none;
   padding: 10px 20px;
-  background-color: #FA9D22; /* Updated dark yellow background for the button */
-  border: none; /* Remove default border */
-  border-radius: 5px; /* Rounded corners for the button */
-  margin-top: 20px; /* Add space above the logout button */
-  box-shadow: 2px 2px 4px #222; /* Box shadow for a 3D effect */
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  align-self: center; /* Center button horizontally */
 }
 
-.alert-warning {
-  position: absolute;
-  top: 10px;
-  right: 20px;
+.logout-button:hover {
+  background-color: #FA9D22; /* Orange background for hover */
+  color: #0F172B; /* Dark blue text */
 }
+
+.loading, .empty-state {
+  text-align: center;
+  padding: 20px;
+}
+
+.empty-state i {
+  color: #FA9D22; /* Orange icon */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .card-header {
+    font-size: 1rem;
+  }
+
+  .logout-button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Hover effect for buttons */
+.btn-primary:hover, .btn-danger:hover {
+  opacity: 0.9;
+}
+
+/* Ensure the correct path to your CSS file */

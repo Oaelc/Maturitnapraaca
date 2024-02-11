@@ -35,8 +35,7 @@ function ViewOrders() {
     } catch (error) {
         console.error('Error deleting order:', error);
     }
-};
-
+  };
 
   const aggregateOrdersByReservation = (orders) => {
     const groupedOrders = {};
@@ -44,10 +43,13 @@ function ViewOrders() {
       if (!groupedOrders[order.reservation.id]) {
         groupedOrders[order.reservation.id] = {
           ...order.reservation,
-          meals: [order.menu.item],
+          meals: [order.menu.item.trim()], // Trim whitespace from the meal item
         };
       } else {
-        groupedOrders[order.reservation.id].meals.push(order.menu.item);
+        const meal = order.menu.item.trim(); // Trim whitespace from the meal item
+        if (meal) { // Only add the meal if it's not an empty string
+          groupedOrders[order.reservation.id].meals.push(meal);
+        }
       }
     });
     return Object.values(groupedOrders);
@@ -69,7 +71,7 @@ function ViewOrders() {
           </thead>
           <tbody>
             {orders.map(order => (
-              <tr key={order.id} className="order-row"> {/* Add the new class here */}
+              <tr key={order.id} className="order-row">
                 <td>{order.user?.username || 'N/A'}</td>
                 <td>{new Date(order.reservationDate).toLocaleDateString()}</td>
                 <td>{order.table}</td>
@@ -92,5 +94,3 @@ function ViewOrders() {
 }
 
 export default ViewOrders;
-
-

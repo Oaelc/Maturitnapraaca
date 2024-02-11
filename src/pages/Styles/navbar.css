@@ -6,7 +6,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: 0; /* Set padding to 0 */
+    padding: 0;
     align-items: center;
 }
 
@@ -16,18 +16,17 @@
     color: inherit;
     font-weight: 500;
     font-size: 25px;
-    width: 100%; /* Take up full width */
-    padding: 30px 15px; /* Padding inside the buttons */
+    width: 100%;
+    padding: 30px 15px;
     text-align: center;
-    transition: background-color 0.3s ease;
-    box-sizing: border-box; /* Include padding and border in the width */
-    margin: 0; /* No margin to make buttons touch each other */
-    border-radius: 0; /* No rounded corners */
-    border-top: 0px solid #505168; /* Top border only */
-    border-bottom: 0px solid #505168; /* Bottom border only */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Smooth transitions for hover effects */
+    box-sizing: border-box;
+    margin: 0;
+    border-radius: 0;
+    border-top: 0px solid #505168;
+    border-bottom: 0px solid #505168;
 }
 
-/* Remove top border from the first link and bottom border from the last link */
 .navbar-link:first-child {
     border-top: none;
 }
@@ -37,34 +36,30 @@
 }
 
 /* Hover effect for navbar links */
-
 .navbar-link:hover, .navbar-link:focus {
-    background-color: #0F172B;
-    color: #DA9D22 !important; /* Adding !important to ensure this color is applied */
-    border-color: #6d6d7d; /* Border color on hover */
+    background-color: #1A233A; /* Slightly lighter blue for hover effect */
+    color: #DA9D22 !important;
+    transform: translateY(-5px); /* Slight upward movement on hover */
 }
 
-
-
-/* Style the navbar title */
 /* Style the navbar title */
 .navbar-title {
-    text-decoration: none; /* Remove underline from link */
+    text-decoration: none;
     color: #FA9D22;
     margin-bottom: 20px;
-    font-size: 30px; /* Increase font size */
-    font-weight: 800; /* Make the font bolder */
+    font-size: 30px;
+    font-weight: 800;
     text-align: center;
-    background-color: #0F172B; /* Add a distinct background color */
-    padding: 15px 30px; /* Add padding for better spacing */
-    border-radius: 10px; /* Rounded corners for a modern look */
-    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+    background-color: #0F172B;
+    padding: 15px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Updated transition property */
 }
 
 .navbar-title:hover {
-    transform: translateY(-2px); /* Slight upward movement on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .navbar-link.active {

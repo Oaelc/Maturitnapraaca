@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import firstSlideImage from '../images/shrecik2.jpg'; // Update the path as necessary
 import secondSlideImage from '../images/shrecik3.jpg'; // Update the path as necessary
 import thirdSlideImage from '../images/shrecikjpg.jpg'; // Update the path as necessary
-
+import "../pages/Styles/home.css";
 const Home: React.FC = () => {
   return (
     <div className="homepage">

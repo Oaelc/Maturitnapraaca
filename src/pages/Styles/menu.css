@@ -1,89 +1,123 @@
-/* menu.css - make sure to include this with your other CSS files */
-
+/* General Styles */
 .container {
-  font-family: 'Arial', sans-serif; /* Consistent font family as before */
-  color: #d2a43a; /* Dark yellow color for text to match the previous page */
+  font-family: 'Arial', sans-serif;
+  color: #FA9D22; /* Specific yellow color */
 }
 
 h2 {
-  text-align: center; /* Center align the header */
-  color: #ffff; /* Dark yellow color for header to stand out */
-  font-size: 2.5rem; /* Larger font size for the header */
-  font-weight: bold; /* Bold font weight for header */
-  text-shadow: 1px 1px 2px #222; /* Text shadow for readability */
-  margin-bottom: 1rem; /* Space below the header */
+  text-align: center;
+  color: #FFFFFF; /* White color for headers */
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #222;
+  margin-bottom: 1rem;
 }
 
+/* Card Styles */
 .card {
-  background-color: #222431; /* Darker blue for card background */
-  color: #ffff; /* Light yellow for card text */
-  border: none; /* Remove default border */
-  border-radius: 5px; /* Rounded corners for cards */
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Shadow for depth */
-  transition: all 0.2s ease-in-out; /* Smooth transition for hover effect */
+  background-color: #222431; /* Dark background for cards */
+  color: #FFFFFF; /* White text color for cards */
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
 }
 
 .card-hover:hover {
   cursor: pointer;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  transform: scale(1.05); /* Slightly larger scale on hover for emphasis */
+  transform: scale(1.05);
 }
 
 .card-body {
-  padding: 15px; /* Padding inside the card */
+  padding: 15px;
+  background-color: #222431; /* Oxford Blue background */
 }
 
 .card-title {
-  font-size: 1.5em; /* Larger font size for title */
-  color: #fa9d22; /* Dark yellow for title to match the theme */
+  font-size: 1.5em;
+  color: #FA9D22; /* Specific yellow color */
 }
 
 .card-text {
-  font-size: 1em; /* Standard font size for text */
+  font-size: 1em;
+  color: #FFFFFF; /* White color for text */
+  font-weight: bold; /* Makes text bolder */
+  text-shadow: 2px 2px 4px #000000; /* Text shadow for readability */
 }
 
 .card-footer {
-  background-color: #FFFF; /* Slightly lighter blue for footer */
-  color: #96880d; /* Light yellow for footer text */
+  background-color: #222431; /* Dark background for footer */
+  color: #FA9D22; /* Specific yellow color */
 }
 
 .text-muted {
-  color: #fa9d22 !important; /* Bright yellow for price, overriding bootstrap's muted text color */
-  font-weight: bold; /* Bold font for price */
+  color: #FA9D22 !important; /* Bright yellow color */
+  font-weight: bold;
 }
 
-/* Modal styling - if you want to match it with the previous page's modal */
-.modal-content {
-  background-color: #2a3b4c; /* Slightly lighter than card for distinction */
-  color: #fa9d22; /* Light yellow text to match the card text */
-  border-radius: 5px; /* Consistent rounded corners */
-  box-shadow: 0px 0px 0px #222; /* Consistent depth effect */
+/* Button Styles */
+.btn-secondary {
+  background-color: #FA9D22; /* Button color to match the theme */
+  color: #FFFFFF; /* White text color for buttons */
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition for hover effect */
 }
 
-.modal-header, .modal-footer {
-  border-bottom: 0px solid #ffffff;
-  border-top: 0px
-   /* Subtle border for a slight separation */
-  /* Darker background for header and footer */
-}
-.modal-body {
-  background-color:  #232430; /* Consistent with the modal-content background */
+.btn-secondary:hover {
+  transform: scale(1.1); /* Scale effect on hover */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Shadow effect on hover */
 }
 
-.modal-header .close {
-  color: #ff2f00; /* Using the dark yellow for visibility */
+/* Continuous pulse animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .btn-secondary {
-  background-color: #fa9d22; /* Button color to match the theme */
-  color: #ffffff; /* Text color to match the theme */
-  border: none; /* No border for a cleaner look */
+  animation: pulse 2s infinite ease-in-out; /* Apply the pulse animation */
 }
 
-/* Media query for responsiveness */
+/* Modal Styling */
+.modal-content {
+  background-color: #2a3b4c; /* Slightly lighter than card for distinction */
+  color: #FA9D22; /* Specific yellow text to match the card text */
+  border-radius: 5px;
+  box-shadow: 0px 0px 0px #222;
+}
+
+.modal-header, .modal-footer {
+  background-color: #222431; /* Dark background */
+  color: #FA9D22; /* Specific yellow text */
+  border: none;
+}
+
+.modal-body {
+  background-color: #ffffff; /* White background for modal body */
+}
+
+.modal-header .close {
+  color: #FA9D22; /* Specific yellow color for the close button */
+}
+
+.modal-footer {
+  background-color: #222431; /* Dark background for modal footer */
+  color: #FA9D22; /* Specific yellow color for text */
+}
+
+/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .container {
-      width: 95%;
-      margin: auto;
+    width: 95%;
+    margin: auto;
   }
+  /* Additional responsive styles can be added here */
 }
